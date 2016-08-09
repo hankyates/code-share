@@ -5,7 +5,6 @@ MD := mkdir
 PWD := pwd
 ELM_MAKE := elm-make
 CP := cp
-RM := rm
 PYTHON := python
 
 P="\\033[34m[+]\\033[0m"
@@ -14,12 +13,6 @@ help:
 	@echo
 	@echo "  \033[34mbuild\033[0m – builds the component"
 	@echo "  \033[34mstart\033[0m – start dev server on :3000 with hot module replacement"
-	@echo
-
-clean:
-	@echo
-	@echo "  $(P) clean"
-	@echo $(RM) -rf $(BUILD_DIR)
 	@echo
 
 build:
@@ -39,6 +32,11 @@ start:
 serve:
 	@echo "  $(P) serve"
 	@$(CD) $(BUILD_DIR) && $(PYTHON) -m SimpleHTTPServer
+	@echo
+
+publish:
+	@echo "  $(P) publish"
+	@./scripts/push-gh-pages $(BUILD_DIR)
 	@echo
 
 .PHONY: build start watch serve help
