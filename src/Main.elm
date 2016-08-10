@@ -16,12 +16,11 @@ main =
 
 init : (Model, Cmd Msg)
 init =
-  (Model 0 True Gists.init Nothing, Task.perform Fail GistsSuccess Gists.getGist)
+  (Model True Gists.init Nothing, Task.perform Fail GistsSuccess Gists.getGist)
 
 -- MODEL
 
 type alias Model = {
-  page: Int,
   loading: Bool,
   gists: (List Gists.Model),
   msg: Maybe Http.Error
@@ -31,9 +30,7 @@ type alias Model = {
 -- UPDATE
 
 type Msg
-  = NextPage
-  | PrevPage
-  | Loading Bool
+  = Loading Bool
   | GistsSuccess (List Gists.Model)
   | Fail Http.Error
 
@@ -54,10 +51,6 @@ update message model =
           loading = False,
           msg = Just (Debug.log "msg" msg)
       }, Cmd.none)
-    NextPage ->
-      ({ model | page = model.page + 1 }, Cmd.none)
-    PrevPage ->
-      ({ model | page = model.page - 1 }, Cmd.none)
 
 -- VIEW
 
