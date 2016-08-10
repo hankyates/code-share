@@ -16,14 +16,15 @@ main =
 
 init : (Model, Cmd Msg)
 init =
-  (Model 0 True Gists.init, Task.perform Fail GistsSuccess Gists.getGist)
+  (Model 0 True Gists.init Nothing, Task.perform Fail GistsSuccess Gists.getGist)
 
 -- MODEL
 
 type alias Model = {
   page: Int,
   loading: Bool,
-  gists: Gists.Model
+  gists: Gists.Model,
+  msg: Maybe Http.Error
 }
 
 
@@ -49,8 +50,9 @@ update message model =
       }, Cmd.none)
     Fail msg ->
       ({
-        model
-        | loading = False
+        model |
+          loading = False,
+          msg = Just (Debug.log "msg" msg)
       }, Cmd.none)
     NextPage ->
       ({ model | page = model.page + 1 }, Cmd.none)
@@ -75,7 +77,7 @@ view model =
     section [] [
       if model.loading
       then text "Loading ..."
-      else div [] (List.map gistTemplate model.gists)
+      else div [] [gistTemplate model.gists]
     ]
   ]
 

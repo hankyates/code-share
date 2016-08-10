@@ -5,14 +5,11 @@ import Http
 import Json.Decode as Json
 
 init : Model
-init =
-  [
-    {
-      name="",
-      content="",
-      description=""
-    }
-  ]
+init = {
+    name="",
+    content="",
+    description=""
+  }
 
 type alias GistModel = {
   name : String,
@@ -20,7 +17,7 @@ type alias GistModel = {
   description : String
 }
 
-type alias Model = (List GistModel)
+type alias Model = GistModel
 
 getGist : Task.Task Http.Error Model
 getGist =
@@ -33,10 +30,8 @@ getGist =
 
 decodeGists : Json.Decoder Model
 decodeGists =
-  Json.list (
-    Json.object3 GistModel
-      (Json.at ["files", "curry.js", "filename"] Json.string)
-      (Json.at ["files", "curry.js", "content"] Json.string)
-      (Json.at ["description"] Json.string)
-  )
+  Json.object3 GistModel
+    (Json.at ["files", "curry.js", "filename"] Json.string)
+    (Json.at ["files", "curry.js", "content"] Json.string)
+    (Json.at ["description"] Json.string)
 
