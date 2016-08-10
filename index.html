@@ -8177,106 +8177,6 @@ var _elm_lang$html$Html_Attributes$classList = function (list) {
 				A2(_elm_lang$core$List$filter, _elm_lang$core$Basics$snd, list))));
 };
 var _elm_lang$html$Html_Attributes$style = _elm_lang$virtual_dom$VirtualDom$style;
-var _elm_lang$html$Html_Events$keyCode = A2(_elm_lang$core$Json_Decode_ops[':='], 'keyCode', _elm_lang$core$Json_Decode$int);
-var _elm_lang$html$Html_Events$targetChecked = A2(
-	_elm_lang$core$Json_Decode$at,
-	_elm_lang$core$Native_List.fromArray(
-		['target', 'checked']),
-	_elm_lang$core$Json_Decode$bool);
-var _elm_lang$html$Html_Events$targetValue = A2(
-	_elm_lang$core$Json_Decode$at,
-	_elm_lang$core$Native_List.fromArray(
-		['target', 'value']),
-	_elm_lang$core$Json_Decode$string);
-var _elm_lang$html$Html_Events$defaultOptions = _elm_lang$virtual_dom$VirtualDom$defaultOptions;
-var _elm_lang$html$Html_Events$onWithOptions = _elm_lang$virtual_dom$VirtualDom$onWithOptions;
-var _elm_lang$html$Html_Events$on = _elm_lang$virtual_dom$VirtualDom$on;
-var _elm_lang$html$Html_Events$onFocus = function (msg) {
-	return A2(
-		_elm_lang$html$Html_Events$on,
-		'focus',
-		_elm_lang$core$Json_Decode$succeed(msg));
-};
-var _elm_lang$html$Html_Events$onBlur = function (msg) {
-	return A2(
-		_elm_lang$html$Html_Events$on,
-		'blur',
-		_elm_lang$core$Json_Decode$succeed(msg));
-};
-var _elm_lang$html$Html_Events$onSubmitOptions = _elm_lang$core$Native_Utils.update(
-	_elm_lang$html$Html_Events$defaultOptions,
-	{preventDefault: true});
-var _elm_lang$html$Html_Events$onSubmit = function (msg) {
-	return A3(
-		_elm_lang$html$Html_Events$onWithOptions,
-		'submit',
-		_elm_lang$html$Html_Events$onSubmitOptions,
-		_elm_lang$core$Json_Decode$succeed(msg));
-};
-var _elm_lang$html$Html_Events$onCheck = function (tagger) {
-	return A2(
-		_elm_lang$html$Html_Events$on,
-		'change',
-		A2(_elm_lang$core$Json_Decode$map, tagger, _elm_lang$html$Html_Events$targetChecked));
-};
-var _elm_lang$html$Html_Events$onInput = function (tagger) {
-	return A2(
-		_elm_lang$html$Html_Events$on,
-		'input',
-		A2(_elm_lang$core$Json_Decode$map, tagger, _elm_lang$html$Html_Events$targetValue));
-};
-var _elm_lang$html$Html_Events$onMouseOut = function (msg) {
-	return A2(
-		_elm_lang$html$Html_Events$on,
-		'mouseout',
-		_elm_lang$core$Json_Decode$succeed(msg));
-};
-var _elm_lang$html$Html_Events$onMouseOver = function (msg) {
-	return A2(
-		_elm_lang$html$Html_Events$on,
-		'mouseover',
-		_elm_lang$core$Json_Decode$succeed(msg));
-};
-var _elm_lang$html$Html_Events$onMouseLeave = function (msg) {
-	return A2(
-		_elm_lang$html$Html_Events$on,
-		'mouseleave',
-		_elm_lang$core$Json_Decode$succeed(msg));
-};
-var _elm_lang$html$Html_Events$onMouseEnter = function (msg) {
-	return A2(
-		_elm_lang$html$Html_Events$on,
-		'mouseenter',
-		_elm_lang$core$Json_Decode$succeed(msg));
-};
-var _elm_lang$html$Html_Events$onMouseUp = function (msg) {
-	return A2(
-		_elm_lang$html$Html_Events$on,
-		'mouseup',
-		_elm_lang$core$Json_Decode$succeed(msg));
-};
-var _elm_lang$html$Html_Events$onMouseDown = function (msg) {
-	return A2(
-		_elm_lang$html$Html_Events$on,
-		'mousedown',
-		_elm_lang$core$Json_Decode$succeed(msg));
-};
-var _elm_lang$html$Html_Events$onDoubleClick = function (msg) {
-	return A2(
-		_elm_lang$html$Html_Events$on,
-		'dblclick',
-		_elm_lang$core$Json_Decode$succeed(msg));
-};
-var _elm_lang$html$Html_Events$onClick = function (msg) {
-	return A2(
-		_elm_lang$html$Html_Events$on,
-		'click',
-		_elm_lang$core$Json_Decode$succeed(msg));
-};
-var _elm_lang$html$Html_Events$Options = F2(
-	function (a, b) {
-		return {stopPropagation: a, preventDefault: b};
-	});
 //import Dict, List, Maybe, Native.Scheduler //
 
 var _evancz$elm_http$Native_Http = function() {
@@ -8633,121 +8533,37 @@ var _evancz$elm_http$Http$post = F3(
 			decoder,
 			A2(_evancz$elm_http$Http$send, _evancz$elm_http$Http$defaultSettings, request));
 	});
-var _hankyates$code_share$Main$decodeGists = _elm_lang$core$Json_Decode$list(
-	A2(
-		_elm_lang$core$Json_Decode$at,
-		_elm_lang$core$Native_List.fromArray(
-			['id']),
-		_elm_lang$core$Json_Decode$string));
-var _hankyates$code_share$Main$decodeUsername = A2(
-	_elm_lang$core$Json_Decode$at,
-	_elm_lang$core$Native_List.fromArray(
-		['owner', 'login']),
-	_elm_lang$core$Json_Decode$string);
-var _hankyates$code_share$Main$gistTemplate = function (gist) {
-	return A2(
-		_elm_lang$html$Html$a,
-		_elm_lang$core$Native_List.fromArray(
-			[
-				_elm_lang$html$Html_Attributes$href('#')
-			]),
-		_elm_lang$core$Native_List.fromArray(
-			[
-				_elm_lang$html$Html$text(gist)
-			]));
-};
-var _hankyates$code_share$Main$subscriptions = function (model) {
-	return _elm_lang$core$Platform_Sub$none;
-};
-var _hankyates$code_share$Main$Model = F3(
-	function (a, b, c) {
-		return {gist: a, username: b, gists: c};
+var _hankyates$code_share$Gists$init = _elm_lang$core$Native_List.fromArray(
+	[
+		{name: '', content: ''}
+	]);
+var _hankyates$code_share$Gists$Model = F2(
+	function (a, b) {
+		return {name: a, content: b};
 	});
-var _hankyates$code_share$Main$init = {
-	ctor: '_Tuple2',
-	_0: A3(
-		_hankyates$code_share$Main$Model,
-		'bde3f79df1574aef7d58',
-		'',
-		_elm_lang$core$Native_List.fromArray(
-			[''])),
-	_1: _elm_lang$core$Platform_Cmd$none
-};
-var _hankyates$code_share$Main$FetchFail = function (a) {
-	return {ctor: 'FetchFail', _0: a};
-};
-var _hankyates$code_share$Main$GistsSucceed = function (a) {
-	return {ctor: 'GistsSucceed', _0: a};
-};
-var _hankyates$code_share$Main$getGists = function (username) {
-	var url = A2(
-		_elm_lang$core$Basics_ops['++'],
-		'https://api.github.com/users/',
-		A2(_elm_lang$core$Basics_ops['++'], username, '/gists'));
-	return A3(
-		_elm_lang$core$Task$perform,
-		_hankyates$code_share$Main$FetchFail,
-		_hankyates$code_share$Main$GistsSucceed,
-		A2(_evancz$elm_http$Http$get, _hankyates$code_share$Main$decodeGists, url));
-};
-var _hankyates$code_share$Main$UsernameSucceed = function (a) {
-	return {ctor: 'UsernameSucceed', _0: a};
-};
-var _hankyates$code_share$Main$getGist = function (gistId) {
-	var url = A2(_elm_lang$core$Basics_ops['++'], 'https://api.github.com/gists/', gistId);
-	return A3(
-		_elm_lang$core$Task$perform,
-		_hankyates$code_share$Main$FetchFail,
-		_hankyates$code_share$Main$UsernameSucceed,
-		A2(_evancz$elm_http$Http$get, _hankyates$code_share$Main$decodeUsername, url));
-};
-var _hankyates$code_share$Main$update = F2(
-	function (msg, model) {
-		var _p0 = msg;
-		switch (_p0.ctor) {
-			case 'Gist':
-				return {
-					ctor: '_Tuple2',
-					_0: _elm_lang$core$Native_Utils.update(
-						model,
-						{gist: _p0._0}),
-					_1: _elm_lang$core$Platform_Cmd$none
-				};
-			case 'GetUsername':
-				return {
-					ctor: '_Tuple2',
-					_0: model,
-					_1: _hankyates$code_share$Main$getGist(model.gist)
-				};
-			case 'GetGists':
-				return {
-					ctor: '_Tuple2',
-					_0: model,
-					_1: _hankyates$code_share$Main$getGists(model.username)
-				};
-			case 'UsernameSucceed':
-				return {
-					ctor: '_Tuple2',
-					_0: _elm_lang$core$Native_Utils.update(
-						model,
-						{username: _p0._0}),
-					_1: _elm_lang$core$Platform_Cmd$none
-				};
-			case 'GistsSucceed':
-				return {
-					ctor: '_Tuple2',
-					_0: _elm_lang$core$Native_Utils.update(
-						model,
-						{gists: _p0._0}),
-					_1: _elm_lang$core$Platform_Cmd$none
-				};
-			default:
-				return {ctor: '_Tuple2', _0: model, _1: _elm_lang$core$Platform_Cmd$none};
-		}
-	});
-var _hankyates$code_share$Main$GetGists = {ctor: 'GetGists'};
-var _hankyates$code_share$Main$GetUsername = {ctor: 'GetUsername'};
-var _hankyates$code_share$Main$view = function (model) {
+var _hankyates$code_share$Gists$gistDecoder = A3(
+	_elm_lang$core$Json_Decode$object2,
+	_hankyates$code_share$Gists$Model,
+	A2(_elm_lang$core$Json_Decode_ops[':='], 'filename', _elm_lang$core$Json_Decode$string),
+	A2(_elm_lang$core$Json_Decode_ops[':='], 'content', _elm_lang$core$Json_Decode$string));
+var _hankyates$code_share$Gists$fileDecoder = _elm_lang$core$Json_Decode$keyValuePairs(_hankyates$code_share$Gists$gistDecoder);
+var _hankyates$code_share$Gists$decodeGists = A2(
+	_elm_lang$core$Json_Decode$map,
+	function (t) {
+		return A2(
+			_elm_lang$core$List$map,
+			function (_p0) {
+				var _p1 = _p0;
+				return _p1._1;
+			},
+			t);
+	},
+	A2(_elm_lang$core$Json_Decode_ops[':='], 'files', _hankyates$code_share$Gists$fileDecoder));
+var _hankyates$code_share$Gists$getGist = function () {
+	var url = 'https://api.github.com/gists/c045ab27e626fa80a19bef9cbeff8576';
+	return A2(_evancz$elm_http$Http$get, _hankyates$code_share$Gists$decodeGists, url);
+}();
+var _hankyates$code_share$Main$gistView = function (gist) {
 	return A2(
 		_elm_lang$html$Html$div,
 		_elm_lang$core$Native_List.fromArray(
@@ -8755,24 +8571,12 @@ var _hankyates$code_share$Main$view = function (model) {
 		_elm_lang$core$Native_List.fromArray(
 			[
 				A2(
-				_elm_lang$html$Html$button,
+				_elm_lang$html$Html$div,
+				_elm_lang$core$Native_List.fromArray(
+					[]),
 				_elm_lang$core$Native_List.fromArray(
 					[
-						_elm_lang$html$Html_Events$onClick(_hankyates$code_share$Main$GetUsername)
-					]),
-				_elm_lang$core$Native_List.fromArray(
-					[
-						_elm_lang$html$Html$text('username')
-					])),
-				A2(
-				_elm_lang$html$Html$button,
-				_elm_lang$core$Native_List.fromArray(
-					[
-						_elm_lang$html$Html_Events$onClick(_hankyates$code_share$Main$GetGists)
-					]),
-				_elm_lang$core$Native_List.fromArray(
-					[
-						_elm_lang$html$Html$text('gists')
+						_elm_lang$html$Html$text(gist.name)
 					])),
 				A2(
 				_elm_lang$html$Html$div,
@@ -8780,23 +8584,166 @@ var _hankyates$code_share$Main$view = function (model) {
 					[]),
 				_elm_lang$core$Native_List.fromArray(
 					[
-						_elm_lang$html$Html$text(model.username)
-					])),
-				A2(
-				_elm_lang$html$Html$div,
-				_elm_lang$core$Native_List.fromArray(
-					[]),
-				A2(_elm_lang$core$List$map, _hankyates$code_share$Main$gistTemplate, model.gists)),
-				_elm_lang$html$Html$text(model.gist)
+						A2(
+						_elm_lang$html$Html$code,
+						_elm_lang$core$Native_List.fromArray(
+							[]),
+						_elm_lang$core$Native_List.fromArray(
+							[
+								_elm_lang$html$Html$text(gist.content)
+							]))
+					]))
 			]));
+};
+var _hankyates$code_share$Main$view = function (model) {
+	return A2(
+		_elm_lang$html$Html$main$,
+		_elm_lang$core$Native_List.fromArray(
+			[]),
+		_elm_lang$core$Native_List.fromArray(
+			[
+				A2(
+				_elm_lang$html$Html$header,
+				_elm_lang$core$Native_List.fromArray(
+					[]),
+				_elm_lang$core$Native_List.fromArray(
+					[
+						A2(
+						_elm_lang$html$Html$a,
+						_elm_lang$core$Native_List.fromArray(
+							[
+								_elm_lang$html$Html_Attributes$href('/')
+							]),
+						_elm_lang$core$Native_List.fromArray(
+							[
+								A2(
+								_elm_lang$html$Html$img,
+								_elm_lang$core$Native_List.fromArray(
+									[
+										_elm_lang$html$Html_Attributes$src('')
+									]),
+								_elm_lang$core$Native_List.fromArray(
+									[]))
+							])),
+						A2(
+						_elm_lang$html$Html$section,
+						_elm_lang$core$Native_List.fromArray(
+							[]),
+						_elm_lang$core$Native_List.fromArray(
+							[
+								A2(
+								_elm_lang$html$Html$h2,
+								_elm_lang$core$Native_List.fromArray(
+									[]),
+								_elm_lang$core$Native_List.fromArray(
+									[
+										_elm_lang$html$Html$text('Hank Yates')
+									]))
+							]))
+					])),
+				A2(
+				_elm_lang$html$Html$section,
+				_elm_lang$core$Native_List.fromArray(
+					[]),
+				_elm_lang$core$Native_List.fromArray(
+					[
+						A2(
+						_elm_lang$html$Html$h3,
+						_elm_lang$core$Native_List.fromArray(
+							[]),
+						_elm_lang$core$Native_List.fromArray(
+							[
+								_elm_lang$html$Html$text('Latest Gists:')
+							])),
+						model.loading ? _elm_lang$html$Html$text('Loading ...') : A2(
+						_elm_lang$html$Html$div,
+						_elm_lang$core$Native_List.fromArray(
+							[]),
+						A2(_elm_lang$core$List$map, _hankyates$code_share$Main$gistView, model.gists))
+					]))
+			]));
+};
+var _hankyates$code_share$Main$update = F2(
+	function (message, model) {
+		var _p0 = message;
+		switch (_p0.ctor) {
+			case 'Loading':
+				return {
+					ctor: '_Tuple2',
+					_0: _elm_lang$core$Native_Utils.update(
+						model,
+						{loading: _p0._0}),
+					_1: _elm_lang$core$Platform_Cmd$none
+				};
+			case 'GistsSuccess':
+				return {
+					ctor: '_Tuple2',
+					_0: _elm_lang$core$Native_Utils.update(
+						model,
+						{gists: _p0._0, loading: false}),
+					_1: _elm_lang$core$Platform_Cmd$none
+				};
+			case 'Fail':
+				return {
+					ctor: '_Tuple2',
+					_0: _elm_lang$core$Native_Utils.update(
+						model,
+						{
+							loading: false,
+							msg: _elm_lang$core$Maybe$Just(
+								A2(_elm_lang$core$Debug$log, 'msg', _p0._0))
+						}),
+					_1: _elm_lang$core$Platform_Cmd$none
+				};
+			case 'NextPage':
+				return {
+					ctor: '_Tuple2',
+					_0: _elm_lang$core$Native_Utils.update(
+						model,
+						{page: model.page + 1}),
+					_1: _elm_lang$core$Platform_Cmd$none
+				};
+			default:
+				return {
+					ctor: '_Tuple2',
+					_0: _elm_lang$core$Native_Utils.update(
+						model,
+						{page: model.page - 1}),
+					_1: _elm_lang$core$Platform_Cmd$none
+				};
+		}
+	});
+var _hankyates$code_share$Main$Model = F4(
+	function (a, b, c, d) {
+		return {page: a, loading: b, gists: c, msg: d};
+	});
+var _hankyates$code_share$Main$Fail = function (a) {
+	return {ctor: 'Fail', _0: a};
+};
+var _hankyates$code_share$Main$GistsSuccess = function (a) {
+	return {ctor: 'GistsSuccess', _0: a};
+};
+var _hankyates$code_share$Main$init = {
+	ctor: '_Tuple2',
+	_0: A4(_hankyates$code_share$Main$Model, 0, true, _hankyates$code_share$Gists$init, _elm_lang$core$Maybe$Nothing),
+	_1: A3(_elm_lang$core$Task$perform, _hankyates$code_share$Main$Fail, _hankyates$code_share$Main$GistsSuccess, _hankyates$code_share$Gists$getGist)
 };
 var _hankyates$code_share$Main$main = {
 	main: _elm_lang$html$Html_App$program(
-		{init: _hankyates$code_share$Main$init, subscriptions: _hankyates$code_share$Main$subscriptions, view: _hankyates$code_share$Main$view, update: _hankyates$code_share$Main$update})
+		{
+			init: _hankyates$code_share$Main$init,
+			view: _hankyates$code_share$Main$view,
+			update: _hankyates$code_share$Main$update,
+			subscriptions: function (_p1) {
+				return _elm_lang$core$Platform_Sub$none;
+			}
+		})
 };
-var _hankyates$code_share$Main$Gist = function (a) {
-	return {ctor: 'Gist', _0: a};
+var _hankyates$code_share$Main$Loading = function (a) {
+	return {ctor: 'Loading', _0: a};
 };
+var _hankyates$code_share$Main$PrevPage = {ctor: 'PrevPage'};
+var _hankyates$code_share$Main$NextPage = {ctor: 'NextPage'};
 var Elm = {};
 Elm['Main'] = Elm['Main'] || {};
 _elm_lang$core$Native_Platform.addPublicModule(Elm['Main'], 'Main', typeof _hankyates$code_share$Main$main === 'undefined' ? null : _hankyates$code_share$Main$main);
