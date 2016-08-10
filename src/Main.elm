@@ -80,8 +80,10 @@ gistView gist =
   div [] [
     div [] [text gist.name],
     div [] [
-      code [] [
-        text gist.content
+      pre [] [
+        code [] [
+          text gist.content
+        ]
       ]
     ]
   ]
