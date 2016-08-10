@@ -23,7 +23,7 @@ init =
 type alias Model = {
   page: Int,
   loading: Bool,
-  gists: Gists.Model,
+  gists: (List Gists.Model),
   msg: Maybe Http.Error
 }
 
@@ -34,7 +34,7 @@ type Msg
   = NextPage
   | PrevPage
   | Loading Bool
-  | GistsSuccess Gists.Model
+  | GistsSuccess (List Gists.Model)
   | Fail Http.Error
 
 update : Msg -> Model -> (Model, Cmd Msg)
@@ -75,16 +75,20 @@ view model =
       ]
     ],
     section [] [
+      h3 [] [text "Latest Gists:"],
       if model.loading
       then text "Loading ..."
-      else div [] [gistTemplate model.gists]
+      else div [] (List.map gistView model.gists)
     ]
   ]
 
-gistTemplate : Gists.GistModel -> Html Msg
-gistTemplate gist =
+gistView : Gists.Model -> Html Msg
+gistView gist =
   div [] [
-    span [] [text gist.name],
-    span [] [text gist.content],
-    span [] [text gist.description]
+    div [] [text gist.name],
+    div [] [
+      code [] [
+        text gist.content
+      ]
+    ]
   ]

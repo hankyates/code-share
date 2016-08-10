@@ -1,37 +1,42 @@
-module Gists exposing (Model, init, getGist, GistModel)
+module Gists exposing (Model, init, getGist)
 
 import Task
 import Http
-import Json.Decode as Json
+import Html.App as Html
+import Json.Decode exposing (..)
+import Html exposing (..)
 
-init : Model
-init = {
+init : List Model
+init = [{
     name="",
-    content="",
-    description=""
-  }
+    content=""
+  }]
 
-type alias GistModel = {
+type alias Model = {
   name : String,
-  content : String,
-  description : String
+  content : String
 }
 
-type alias Model = GistModel
-
-getGist : Task.Task Http.Error Model
+getGist : Task.Task Http.Error (List Model)
 getGist =
   let
     url =
-      "https://api.github.com/gists/bde3f79df1574aef7d58"
+      "https://api.github.com/gists/c045ab27e626fa80a19bef9cbeff8576"
   in
     Http.get decodeGists url
 
-
-decodeGists : Json.Decoder Model
+decodeGists : Decoder (List Model)
 decodeGists =
-  Json.object3 GistModel
-    (Json.at ["files", "curry.js", "filename"] Json.string)
-    (Json.at ["files", "curry.js", "content"] Json.string)
-    (Json.at ["description"] Json.string)
+  "files" := fileDecoder |> map (\t -> List.map (\(filename, model) -> model) t)
+
+fileDecoder : Decoder (List (String, Model))
+fileDecoder =
+  gistDecoder
+  |> keyValuePairs
+
+gistDecoder : Decoder Model
+gistDecoder =
+  object2 Model
+    ("filename" := string)
+    ("content" := string)
 
