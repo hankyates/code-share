@@ -8585,12 +8585,19 @@ var _hankyates$code_share$Main$gistView = function (gist) {
 				_elm_lang$core$Native_List.fromArray(
 					[
 						A2(
-						_elm_lang$html$Html$code,
+						_elm_lang$html$Html$pre,
 						_elm_lang$core$Native_List.fromArray(
 							[]),
 						_elm_lang$core$Native_List.fromArray(
 							[
-								_elm_lang$html$Html$text(gist.content)
+								A2(
+								_elm_lang$html$Html$code,
+								_elm_lang$core$Native_List.fromArray(
+									[]),
+								_elm_lang$core$Native_List.fromArray(
+									[
+										_elm_lang$html$Html$text(gist.content)
+									]))
 							]))
 					]))
 			]));
@@ -8683,7 +8690,7 @@ var _hankyates$code_share$Main$update = F2(
 						{gists: _p0._0, loading: false}),
 					_1: _elm_lang$core$Platform_Cmd$none
 				};
-			case 'Fail':
+			default:
 				return {
 					ctor: '_Tuple2',
 					_0: _elm_lang$core$Native_Utils.update(
@@ -8695,27 +8702,11 @@ var _hankyates$code_share$Main$update = F2(
 						}),
 					_1: _elm_lang$core$Platform_Cmd$none
 				};
-			case 'NextPage':
-				return {
-					ctor: '_Tuple2',
-					_0: _elm_lang$core$Native_Utils.update(
-						model,
-						{page: model.page + 1}),
-					_1: _elm_lang$core$Platform_Cmd$none
-				};
-			default:
-				return {
-					ctor: '_Tuple2',
-					_0: _elm_lang$core$Native_Utils.update(
-						model,
-						{page: model.page - 1}),
-					_1: _elm_lang$core$Platform_Cmd$none
-				};
 		}
 	});
-var _hankyates$code_share$Main$Model = F4(
-	function (a, b, c, d) {
-		return {page: a, loading: b, gists: c, msg: d};
+var _hankyates$code_share$Main$Model = F3(
+	function (a, b, c) {
+		return {loading: a, gists: b, msg: c};
 	});
 var _hankyates$code_share$Main$Fail = function (a) {
 	return {ctor: 'Fail', _0: a};
@@ -8725,7 +8716,7 @@ var _hankyates$code_share$Main$GistsSuccess = function (a) {
 };
 var _hankyates$code_share$Main$init = {
 	ctor: '_Tuple2',
-	_0: A4(_hankyates$code_share$Main$Model, 0, true, _hankyates$code_share$Gists$init, _elm_lang$core$Maybe$Nothing),
+	_0: A3(_hankyates$code_share$Main$Model, true, _hankyates$code_share$Gists$init, _elm_lang$core$Maybe$Nothing),
 	_1: A3(_elm_lang$core$Task$perform, _hankyates$code_share$Main$Fail, _hankyates$code_share$Main$GistsSuccess, _hankyates$code_share$Gists$getGist)
 };
 var _hankyates$code_share$Main$main = {
@@ -8742,8 +8733,6 @@ var _hankyates$code_share$Main$main = {
 var _hankyates$code_share$Main$Loading = function (a) {
 	return {ctor: 'Loading', _0: a};
 };
-var _hankyates$code_share$Main$PrevPage = {ctor: 'PrevPage'};
-var _hankyates$code_share$Main$NextPage = {ctor: 'NextPage'};
 var Elm = {};
 Elm['Main'] = Elm['Main'] || {};
 _elm_lang$core$Native_Platform.addPublicModule(Elm['Main'], 'Main', typeof _hankyates$code_share$Main$main === 'undefined' ? null : _hankyates$code_share$Main$main);
