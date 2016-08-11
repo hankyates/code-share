@@ -60,7 +60,7 @@ view model =
         img [src "https://www.gravatar.com/avatar/2b25725ad1d27ab6d0b467cc841581e0"] []
       ],
       div [class "description"] [
-        h2 [] [text "Code share"],
+        h1 [] [text "Code share"],
         div [] [text "Just a place where I share snippets of code."]
       ]
     ],
