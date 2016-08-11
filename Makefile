@@ -1,12 +1,5 @@
 BUILD_DIR ?= build
 
-CD := cd
-MD := mkdir
-PWD := pwd
-ELM_MAKE := elm-make
-CP := cp
-PYTHON := python
-
 P="\\033[34m[+]\\033[0m"
 
 help:
@@ -17,9 +10,27 @@ help:
 
 build:
 	@echo "  $(P) build"
-	@$(MD) -p $(BUILD_DIR)
-	@$(ELM_MAKE) ./src/Main.elm --output $(BUILD_DIR)/main.js
-	@$(CP) -v static/* build/
+	@$(MAKE) elm
+	@$(MAKE) static
+	@$(MAKE) sass
+	@echo
+
+static:
+	@echo "  $(P) static"
+	@mkdir -p $(BUILD_DIR)
+	@cp -v static/* build/
+	@echo
+
+elm:
+	@echo "  $(P) elm"
+	@mkdir -p $(BUILD_DIR)
+	@elm-make ./src/Main.elm --output $(BUILD_DIR)/main.js
+	@echo
+
+sass:
+	@echo "  $(P) sass"
+	@mkdir -p $(BUILD_DIR)
+	@node-sass sass/main.scss $(BUILD_DIR)/main.css
 	@echo
 
 start:
@@ -32,13 +43,12 @@ start:
 
 serve:
 	@echo "  $(P) serve"
-	@$(CD) $(BUILD_DIR) && $(PYTHON) -m SimpleHTTPServer
+	@cd $(BUILD_DIR) && python -m SimpleHTTPServer
 	@echo
 
 publish:
 	@echo "  $(P) publish"
 	@$(MAKE) clean
-	@$(MD) -p $(BUILD_DIR)
 	@$(MAKE) build
 	@./scripts/push-gh-pages $(BUILD_DIR)
 	@echo
@@ -48,4 +58,4 @@ clean:
 	@rm -rf $(BUILD_DIR)
 	@echo
 
-.PHONY: build start serve help clean publish
+.PHONY: build start serve help clean publish sass static elm

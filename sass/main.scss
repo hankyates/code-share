@@ -1,0 +1,9 @@
+@import "vendor/bourbon/bourbon";
+@import "vendor/bitters/base";
+
+$black: #111;
+$white: #EFEFEF;
+
+body {
+  background-color: $white;
+}
