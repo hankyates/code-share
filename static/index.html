@@ -12,11 +12,13 @@
   </head>
   <body>
     <script type="text/javascript" charset="utf-8">
-      Elm.Main.fullscreen();
-      // MOVE ALONG NOTHING TO SEE HERE
-      var id = setInterval(function() {
-        hljs.initHighlighting();
-      }, 1000);
+      var app = Elm.Main.fullscreen();
+      app.ports.gistFetch.subscribe(function() {
+        // This is still called before the html is rendereed.
+        setTimeout(function() {
+          hljs.initHighlighting();
+        }, 1000);
+      });
     </script>
   </body>
 </html>

@@ -5,6 +5,7 @@ import Html.Attributes exposing (..)
 import Gists
 import Task
 import Http
+import Ports
 
 main =
   Html.program {
@@ -40,11 +41,7 @@ update message model =
     Loading loading ->
       ({model | loading = loading}, Cmd.none)
     GistsSuccess gists ->
-      ({
-        model |
-          gists = gists,
-          loading = False
-      }, Cmd.none)
+      ({ model | gists = gists, loading = False }, Ports.gistFetch Nothing)
     Fail msg ->
       ({
         model |
