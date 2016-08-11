@@ -1,9 +1,38 @@
 @import "vendor/bourbon/bourbon";
 @import "vendor/bitters/base";
 
-$black: #111;
-$white: #EFEFEF;
-
 body {
-  background-color: $white;
+  margin: 0;
+  background-color: #EFEFEF;
+}
+
+header {
+  background-color: $light-gray;
+}
+
+.gist-list, header {
+  padding: 1em;
+}
+
+header {
+  a, .description {
+    display: inline-block;
+  }
+  a {
+    vertical-align: top;
+  }
+  .description {
+    margin-left: 1em;
+  }
+  img {
+    border-radius: 50px;
+  }
+}
+
+.gist-list {
+  width: 100%;
+  @media (min-width: $desktop-screen + 1) {
+    width: 50%;
+  }
+  margin: 0 auto;
 }

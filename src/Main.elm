@@ -56,16 +56,14 @@ view model =
   main' [] [
     header [] [
       a [href "/"] [
-        img [src ""] []
+        img [src "https://www.gravatar.com/avatar/2b25725ad1d27ab6d0b467cc841581e0"] []
       ],
-      section [] [
-        h2 [] [
-          text "Hank Yates"
-        ]
+      div [class "description"] [
+        h2 [] [text "Code share"],
+        div [] [text "Just a place where I share snippets of code."]
       ]
     ],
-    section [] [
-      h3 [] [text "Latest Gists:"],
+    section [class "gist-list"] [
       if model.loading
       then text "Loading ..."
       else div [] (List.map gistView model.gists)
@@ -82,5 +80,6 @@ gistView gist =
           text gist.content
         ]
       ]
-    ]
+    ],
+    hr [] []
   ]

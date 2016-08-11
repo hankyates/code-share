@@ -1,9 +1,10 @@
 // Breakpoints
 $medium-screen: 600px;
 $large-screen: 900px;
+$desktop-screen: 1024px;
 
 // Typography
-$base-font-family: $font-stack-system;
+$base-font-family: $font-stack-helvetica;
 $heading-font-family: $base-font-family;
 
 // Font Sizes
@@ -20,10 +21,10 @@ $small-spacing: $base-spacing / 2;
 $base-z-index: 0;
 
 // Colors
-$blue: #1565c0;
-$dark-gray: #333;
+$blue: #00b4ff;
+$dark-gray: #515151;
 $medium-gray: #999;
-$light-gray: #ddd;
+$light-gray: #bfbfbf;
 
 // Font Colors
 $base-font-color: $dark-gray;
