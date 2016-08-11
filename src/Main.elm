@@ -1,4 +1,5 @@
 import Debug
+import String
 import Html exposing (..)
 import Html.App as Html
 import Html.Attributes exposing (..)
@@ -75,8 +76,8 @@ gistView gist =
   div [] [
     div [] [text gist.name],
     div [] [
-      pre [] [
-        code [] [
+      pre [class "hljs"] [
+        code [class (String.toLower gist.language)] [
           text gist.content
         ]
       ]

@@ -9,12 +9,14 @@ import Html exposing (..)
 init : List Model
 init = [{
     name="",
-    content=""
+    content="",
+    language=""
   }]
 
 type alias Model = {
   name : String,
-  content : String
+  content : String,
+  language : String
 }
 
 getGist : Task.Task Http.Error (List Model)
@@ -36,7 +38,8 @@ fileDecoder =
 
 gistDecoder : Decoder Model
 gistDecoder =
-  object2 Model
+  object3 Model
     ("filename" := string)
     ("content" := string)
+    ("language" := string)
 
