@@ -70,7 +70,7 @@ view model =
       else div [] (List.map gistView model.gists)
     ]
   ]
-
+-- TODO figure out how to get this into Gists.elm
 gistView : Gists.Model -> Html Msg
 gistView gist =
   div [] [
