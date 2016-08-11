@@ -8568,17 +8568,18 @@ var _evancz$elm_http$Http$post = F3(
 
 var _hankyates$code_share$Gists$init = _elm_lang$core$Native_List.fromArray(
 	[
-		{name: '', content: ''}
+		{name: '', content: '', language: ''}
 	]);
-var _hankyates$code_share$Gists$Model = F2(
-	function (a, b) {
-		return {name: a, content: b};
+var _hankyates$code_share$Gists$Model = F3(
+	function (a, b, c) {
+		return {name: a, content: b, language: c};
 	});
-var _hankyates$code_share$Gists$gistDecoder = A3(
-	_elm_lang$core$Json_Decode$object2,
+var _hankyates$code_share$Gists$gistDecoder = A4(
+	_elm_lang$core$Json_Decode$object3,
 	_hankyates$code_share$Gists$Model,
 	A2(_elm_lang$core$Json_Decode_ops[':='], 'filename', _elm_lang$core$Json_Decode$string),
-	A2(_elm_lang$core$Json_Decode_ops[':='], 'content', _elm_lang$core$Json_Decode$string));
+	A2(_elm_lang$core$Json_Decode_ops[':='], 'content', _elm_lang$core$Json_Decode$string),
+	A2(_elm_lang$core$Json_Decode_ops[':='], 'language', _elm_lang$core$Json_Decode$string));
 var _hankyates$code_share$Gists$fileDecoder = _elm_lang$core$Json_Decode$keyValuePairs(_hankyates$code_share$Gists$gistDecoder);
 var _hankyates$code_share$Gists$decodeGists = A2(
 	_elm_lang$core$Json_Decode$map,
@@ -8596,6 +8597,12 @@ var _hankyates$code_share$Gists$getGist = function () {
 	var url = 'https://api.github.com/gists/c045ab27e626fa80a19bef9cbeff8576';
 	return A2(_evancz$elm_http$Http$get, _hankyates$code_share$Gists$decodeGists, url);
 }();
+
+var _hankyates$code_share$Ports$gistFetch = _elm_lang$core$Native_Platform.outgoingPort(
+	'gistFetch',
+	function (v) {
+		return (v.ctor === 'Nothing') ? null : v._0;
+	});
 
 var _hankyates$code_share$Main$gistView = function (gist) {
 	return A2(
@@ -8621,19 +8628,30 @@ var _hankyates$code_share$Main$gistView = function (gist) {
 						A2(
 						_elm_lang$html$Html$pre,
 						_elm_lang$core$Native_List.fromArray(
-							[]),
+							[
+								_elm_lang$html$Html_Attributes$class('hljs')
+							]),
 						_elm_lang$core$Native_List.fromArray(
 							[
 								A2(
 								_elm_lang$html$Html$code,
 								_elm_lang$core$Native_List.fromArray(
-									[]),
+									[
+										_elm_lang$html$Html_Attributes$class(
+										_elm_lang$core$String$toLower(gist.language))
+									]),
 								_elm_lang$core$Native_List.fromArray(
 									[
 										_elm_lang$html$Html$text(gist.content)
 									]))
 							]))
-					]))
+					])),
+				A2(
+				_elm_lang$html$Html$hr,
+				_elm_lang$core$Native_List.fromArray(
+					[]),
+				_elm_lang$core$Native_List.fromArray(
+					[]))
 			]));
 };
 var _hankyates$code_share$Main$view = function (model) {
@@ -8661,41 +8679,45 @@ var _hankyates$code_share$Main$view = function (model) {
 								_elm_lang$html$Html$img,
 								_elm_lang$core$Native_List.fromArray(
 									[
-										_elm_lang$html$Html_Attributes$src('')
+										_elm_lang$html$Html_Attributes$src('https://www.gravatar.com/avatar/2b25725ad1d27ab6d0b467cc841581e0')
 									]),
 								_elm_lang$core$Native_List.fromArray(
 									[]))
 							])),
 						A2(
-						_elm_lang$html$Html$section,
+						_elm_lang$html$Html$div,
 						_elm_lang$core$Native_List.fromArray(
-							[]),
+							[
+								_elm_lang$html$Html_Attributes$class('description')
+							]),
 						_elm_lang$core$Native_List.fromArray(
 							[
 								A2(
-								_elm_lang$html$Html$h2,
+								_elm_lang$html$Html$h1,
 								_elm_lang$core$Native_List.fromArray(
 									[]),
 								_elm_lang$core$Native_List.fromArray(
 									[
-										_elm_lang$html$Html$text('Hank Yates')
+										_elm_lang$html$Html$text('Code share')
+									])),
+								A2(
+								_elm_lang$html$Html$div,
+								_elm_lang$core$Native_List.fromArray(
+									[]),
+								_elm_lang$core$Native_List.fromArray(
+									[
+										_elm_lang$html$Html$text('Just a place where I share snippets of code.')
 									]))
 							]))
 					])),
 				A2(
 				_elm_lang$html$Html$section,
 				_elm_lang$core$Native_List.fromArray(
-					[]),
+					[
+						_elm_lang$html$Html_Attributes$class('gist-list')
+					]),
 				_elm_lang$core$Native_List.fromArray(
 					[
-						A2(
-						_elm_lang$html$Html$h3,
-						_elm_lang$core$Native_List.fromArray(
-							[]),
-						_elm_lang$core$Native_List.fromArray(
-							[
-								_elm_lang$html$Html$text('Latest Gists:')
-							])),
 						model.loading ? _elm_lang$html$Html$text('Loading ...') : A2(
 						_elm_lang$html$Html$div,
 						_elm_lang$core$Native_List.fromArray(
@@ -8722,7 +8744,7 @@ var _hankyates$code_share$Main$update = F2(
 					_0: _elm_lang$core$Native_Utils.update(
 						model,
 						{gists: _p0._0, loading: false}),
-					_1: _elm_lang$core$Platform_Cmd$none
+					_1: _hankyates$code_share$Ports$gistFetch(_elm_lang$core$Maybe$Nothing)
 				};
 			default:
 				return {
